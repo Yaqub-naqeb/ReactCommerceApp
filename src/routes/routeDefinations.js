@@ -5,7 +5,7 @@ const routes = {
     productPage: {
       path: "/products/:productId",
     },
-    //  loader: booksLoader,
+
   },
   cart: {
     path: "/cart",
