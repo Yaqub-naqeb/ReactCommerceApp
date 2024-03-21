@@ -14,13 +14,15 @@ export const productsLoader = async ({ request }) => {
   return productsData;
 };
 import { gettingProducts } from "../../api/get/fetchData";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData,useNavigation } from "react-router-dom";
 import ProductCard from "../../components/cards/ProductCard";
 import Pagination from "../../components/Pagination";
 import { useState } from "react";
 
+
 const Products = () => {
   const productsData = useLoaderData();
+  const navigate=useNavigation();
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredProducts, setFilteredProducts] = useState(null);
 
@@ -43,10 +45,13 @@ console.log(filteredProducts)
     setFilteredProducts(filtered);
   };
 
-
+if(navigate.state==='loading'){
+  return <h1>Loading...</h1>
+}
 
   return (
     <div className="py-[5rem]">
+
 
 
 

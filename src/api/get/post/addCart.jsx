@@ -1,14 +1,14 @@
-const addCart = async (newBook,url) => {
+const addCart = async (url,newCart,) => {
     // eslint-disable-next-line no-unused-vars, react-hooks/rules-of-hooks
     let response;
     try {
      
-      response = await fetch("http://localhost:3001/carts", {
+      response = await fetch(url, {
         method: "POST",
         headers: {
           Accept: "application/json",
         },
-        body: newBook,
+        body: newCart,
       });
     } catch (error) {
       // setError(error);
