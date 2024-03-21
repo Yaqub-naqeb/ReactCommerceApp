@@ -1,3 +1,4 @@
+import shopping from '../../assets/hands-working-digital-device-network-graphic-overlay.jpg'
 const Home = () => {
   return (
     <div className="bg-gray-100 min-h-screen">
@@ -14,7 +15,7 @@ const Home = () => {
                     <a href="/products" className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 ease-in-out">Explore Products</a>
                 </div>
                 <div className="lg:w-1/2">
-                    <img src="https://via.placeholder.com/800x500" alt="Hero" className="rounded-lg shadow-lg" />
+                    <img src={shopping} alt="Hero" className="rounded-lg shadow-lg" />
                 </div>
             </div>
         </div>

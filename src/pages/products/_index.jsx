@@ -17,19 +17,60 @@ import { gettingProducts } from "../../api/get/fetchData";
 import { useLoaderData } from "react-router-dom";
 import ProductCard from "../../components/cards/ProductCard";
 import Pagination from "../../components/Pagination";
+import { useState } from "react";
 
 const Products = () => {
   const productsData = useLoaderData();
-  console.log(productsData);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredProducts, setFilteredProducts] = useState(null);
+
+
+
+    // Function to handle search query change
+    const handleSearchChange = (e) => {
+      setSearchQuery(e.target.value);
+      filterProducts(e.target.value);
+    };
+  
+console.log(filteredProducts)
+
+
+
+  const filterProducts = (query) => {
+    const filtered = productsData.data.data.filter((product) =>
+      product.name.toLowerCase().includes(query.toLowerCase())
+    );
+    setFilteredProducts(filtered);
+  };
+
+
 
   return (
     <div className="py-[5rem]">
+
+
+
+<div className="flex justify-center my-4">
+        <input
+          type="text"
+          placeholder="Search products..."
+          value={searchQuery}
+          onChange={handleSearchChange}
+          className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+
+
+      
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 p-20">
-        {productsData.data.data.map((product) => (
-          <>
-            <ProductCard product={product} />
-          </>
-        ))}
+         {filteredProducts
+          ? filteredProducts.map((product) => (
+              <ProductCard key={product.id} product={product} page={productsData.data.current_page} />
+            ))
+          : productsData.data.data.map((product) => (
+              <ProductCard key={product.id} product={product} page={productsData.data.current_page} />
+            ))}
       </div>
       <Pagination
         currentPage={productsData.data.current_page}
@@ -42,3 +83,5 @@ const Products = () => {
 };
 
 export default Products;
+
+

@@ -2,7 +2,8 @@ import  { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product,page }) => {
+  
     const [hovered, setHovered] = useState(false);
 
     const handleMouseEnter = () => {
@@ -16,6 +17,7 @@ const ProductCard = ({ product }) => {
     return (
         <NavLink
             to={`/products/${product.slugable.key}`}
+            
             key={product.id}
             className=" border border-gray-200 rounded-lg overflow-hidden shadow-lg transition duration-300 ease-in-out transform hover:scale-105"
             onMouseEnter={handleMouseEnter}
