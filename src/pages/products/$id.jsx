@@ -1,5 +1,4 @@
 
-import { useState ,useEffect} from "react";
 import { gettingProducts } from "../../api/get/fetchData";
 import {  useLoaderData} from "react-router-dom";
 
@@ -7,7 +6,7 @@ import {  useLoaderData} from "react-router-dom";
 
 export const productLoader=async({request,params})=>{
   const url = new URL(request.url);
-  // const page = url.searchParams.get("page");
+  const page = url.searchParams.get("page");
  
 
   
@@ -19,8 +18,9 @@ export const productLoader=async({request,params})=>{
   try {
     productsData = await gettingProducts(
       `https://ewaiq.com/public/api/v1/products/all?page=${page ? page : 1}`
-    );    productDetail = productsData.data.data.filter(item =>
-      item.slugable.key.toLowerCase().includes(params.id));
+    );  
+      // productDetail = productsData.data.data.filter(item =>
+      // item.slugable.key.toLowerCase().includes(params.id));
 
 
 
@@ -28,17 +28,16 @@ export const productLoader=async({request,params})=>{
     console.log(err);
   }
 
-  return productDetail;
+  return productsData.data.current_page;
 }
 
 
-const ProductDetail = ({props}) => {
-  console.log(props)
+const ProductDetail = () => {
+ 
+  const page = useLoaderData();
 
   
-  const productDetail = useLoaderData();
-  
-  console.log(productDetail)
+  console.log(page)
 
   // const [productDetail,setProductDetail]=useState(null)
 

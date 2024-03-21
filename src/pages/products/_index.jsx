@@ -24,7 +24,7 @@ const Products = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredProducts, setFilteredProducts] = useState(null);
 
-
+console.log(productsData)
 
     // Function to handle search query change
     const handleSearchChange = (e) => {
@@ -66,10 +66,10 @@ console.log(filteredProducts)
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 p-20">
          {filteredProducts
           ? filteredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} page={productsData.data.current_page} />
+              <ProductCard key={product.id} product={product}  />
             ))
           : productsData.data.data.map((product) => (
-              <ProductCard key={product.id} product={product} page={productsData.data.current_page} />
+              <ProductCard key={product.id} product={product}  />
             ))}
       </div>
       <Pagination

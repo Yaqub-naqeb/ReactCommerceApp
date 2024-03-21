@@ -1,0 +1,58 @@
+{
+  "users": [
+    {
+      "id": "0102",
+      "username": "yaqub",
+      "email": "yaqub.009448401@gmail.com",
+      "password": "yaqub009"
+    },
+    {
+      "id": "28aa",
+      "username": "new",
+      "email": "new12@gamil.com",
+      "password": "new12345"
+    },
+    {
+      "id": "6722",
+      "username": "yaqwbb",
+      "email": "zirak888@gmail.com",
+      "password": "yaqwb123$"
+    },
+    {
+      "id": "80ba",
+      "username": "hi",
+      "email": "hi@gmail.com",
+      "password": "hil;jkl;kj"
+    },
+    {
+      "id": "5211",
+      "username": "kaka",
+      "email": "zirak888@gmail.com",
+      "password": "fksaldjlk;fdsaj"
+    },
+    {
+      "id": "331a",
+      "username": "ahmad",
+      "email": "ahmad@gmail.com",
+      "password": "ahma1fadskj35446$%RG"
+    },
+    {
+      "id": "e99a",
+      "username": "babm",
+      "email": "babo@gmail.com",
+      "password": "babTAfasfadsjkklj@$4F"
+    }
+  ],
+  "carts": [
+    {
+      "id": "de74",
+      "name":"name",
+      "price":"price",
+      "brand_name":"brand",
+      "user_id": "28aa",
+      "image": "new"
+      
+    
+    }
+  ]
+}
