@@ -6,6 +6,7 @@ export const productsLoader=async({request})=>{
     
         try {
           productsData = await gettingProducts('https://ewaiq.com/public/api/v1/products/all');
+
         } catch (err) {
           console.log(err);
         }
@@ -16,34 +17,28 @@ export const productsLoader=async({request})=>{
 
 
 import { gettingProducts } from "../../api/get/fetchData";
-import { NavLink, useLoaderData} from "react-router-dom";
-
+import {  useLoaderData} from "react-router-dom";
+import ProductCard from '../../components/cards/ProductCard'
 
 
 
 const Products = () => {
     const productsData = useLoaderData();
 
- console.log(productsData)
-    
+    console.log(productsData)
 
   return (
-    <div className="grid grid-cols-4 gap-5 p-28">
+    <div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 p-20">
 
-     { productsData.data.data.map((product)=>(<NavLink to={`/products/${product.slugable
-.key}`} key={product.id}>
-<img src={`https://ewaiq.com/public/storage/${product.image}`} className="w-[15rem] h-[15rem] object-cover " alt="img"/>
-
-<h1>{product.name}</h1>
-<p>{product.brand.name}</p>
-<p>${product.price}</p>
-
-</NavLink>
-      ))}
+    {productsData.data.data.map(product => (
+       <>
+         <ProductCard product={product}/>
+         </>
+    ))}
   
-
-
-    </div>
+</div>
+</div>
 
   )
 }
