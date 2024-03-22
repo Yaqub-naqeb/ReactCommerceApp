@@ -1,6 +1,6 @@
-export const gettingProducts = async (url) => {
+export const gettingData = async (url,method) => {
   const response = await fetch(url,{
-    method: 'POST', 
+    method: method, 
   });
 
   if (response.status !== 200) throw response;

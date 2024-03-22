@@ -1,5 +1,5 @@
 
-import { gettingProducts } from "../../api/get/fetchData";
+import { gettingData } from "../../api/get/fetchData";
 import {  useLoaderData} from "react-router-dom";
 
 
@@ -8,22 +8,13 @@ export const productLoader=async({request,params})=>{
   const url = new URL(request.url);
   const page = url.searchParams.get("page");
  
-
-  
-
-    
   let productsData = {};
-  let productDetail={};
 
   try {
-    productsData = await gettingProducts(
-      `https://ewaiq.com/public/api/v1/products/all?page=${page ? page : 1}`
+    productsData = await gettingData(
+      `https://ewaiq.com/public/api/v1/products/all?page=${page ? page : 1}`,'POST'
     );  
-      // productDetail = productsData.data.data.filter(item =>
-      // item.slugable.key.toLowerCase().includes(params.id));
-
-
-
+     
   } catch (err) {
     console.log(err);
   }

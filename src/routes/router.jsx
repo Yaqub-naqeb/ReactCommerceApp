@@ -2,8 +2,8 @@ import ErrorPage from "../pages/Error";
 import routes from "./routeDefinations";
 import Root from "../pages/Root";
 import Home from "../pages/home/_index";
-import Products, { productsLoader } from "../pages/products/_index";
-import Cart from "../pages/cart/_index";
+import Products, { cartsAction, productsLoader } from "../pages/products/_index";
+import Cart, {  cartsLoader } from "../pages/cart/_index";
 import ProductDetail, { productLoader } from "../pages/products/$id"; 
 const routesConfig = [
   {
@@ -18,6 +18,7 @@ const routesConfig = [
         path: routes.products.path,
         element: <Products />,
        loader: productsLoader,
+       action:cartsAction,
 
       },{
         path:'/products/:id',
@@ -27,6 +28,8 @@ const routesConfig = [
       {
         path: routes.cart.path,
         element: <Cart />,
+        loader: cartsLoader,
+       
       },
     ],
   },

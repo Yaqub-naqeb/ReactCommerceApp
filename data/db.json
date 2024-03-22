@@ -43,16 +43,5 @@
       "password": "babTAfasfadsjkklj@$4F"
     }
   ],
-  "carts": [
-    {
-      "id": "de74",
-      "name":"name",
-      "price":"price",
-      "brand_name":"brand",
-      "user_id": "28aa",
-      "image": "new"
-      
-    
-    }
-  ]
+  "carts": []
 }
