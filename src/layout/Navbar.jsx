@@ -2,9 +2,15 @@ import { useState } from "react";
 import Hamburger from "hamburger-react";
 
 import routes from "../routes/routeDefinations";
-import { NavLink } from "react-router-dom";
+import { NavLink,useNavigation } from "react-router-dom";
+
+import {MoonLoader,BeatLoader,SyncLoader} from 'react-spinners'
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const navigate=useNavigation();
+
 
   const pages = [
     { name: "Home", path: routes.root.path },
@@ -30,7 +36,7 @@ const Navbar = () => {
               to={page.path}
               className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
             >
-              {page.name}
+              { page.name==='Products' ? navigate.state==='loading'?<BeatLoader size={10} color="#36d7b7" />:page.name:page.name}
             </NavLink>
           ))}
         </div>
@@ -69,7 +75,7 @@ const Navbar = () => {
               to={page.path}
               className="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
             >
-              {page.name}
+              {navigate.state==='loading'?'loading':page.name}
             </NavLink>
           ))}
         </div>

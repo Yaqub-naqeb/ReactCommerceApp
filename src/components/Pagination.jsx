@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 
 const Pagination = ({ totalPages, currentPage, nextPage, prevPage }) => {
+  console.log(currentPage,'dfjas;kldfjs;ak')
   const nextNumber = parseInt(nextPage?.match(/page=(\d+)/)[1]);
   const prevNumber = parseInt(prevPage?.match(/page=(\d+)/)[1]);
 
@@ -18,6 +19,8 @@ const Pagination = ({ totalPages, currentPage, nextPage, prevPage }) => {
   };
 
   const pageNumbers = getPageRange();
+
+
 
   return (
     <nav

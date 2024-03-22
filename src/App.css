@@ -6,3 +6,9 @@
 .hoverd{
   background-color: aqua;
 }
+.bg-opacity-60{
+background-color: #0000007d !important;
+backdrop-filter: blur(3px); /* Adjust the blur radius as needed */
+-webkit-backdrop-filter: blur(3px);
+ /* For Safari */
+}

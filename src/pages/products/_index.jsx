@@ -38,7 +38,7 @@ export const productsLoader = async ({ request }) => {
     //   `https://ewaiq.com/public/api/v1/products/all?page=${page ? page : 1}`,'POST'
     // );
     productsData = await gettingData(
-      'https://ewaiq.com/public/api/v1/products/featured','GET'
+      `https://ewaiq.com/public/api/v1/products/featured?page=${page ? page : 1}`,'GET'
     );
 
 
@@ -89,9 +89,9 @@ const handleCart=(data)=>{
     setFilteredProducts(filtered);
   };
 
-if(navigate.state==='loading'){
-  return <h1>Loading...</h1>
-}
+// if(navigate.state==='loading'){
+//   return <h1>Loading...</h1>
+// }
 
   return (
     <div className="py-[5rem]">
@@ -115,10 +115,10 @@ if(navigate.state==='loading'){
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 p-20">
       {filteredProducts
           ? filteredProducts.map((product) => (
-              <ProductCard key={product.id} product={product}  />
+              <ProductCard key={product.id} product={product} handleCart={handleCart}  navigate={navigate} />
             ))
           : productsData.data.data.map((product) => (
-              <ProductCard key={product.id} product={product}  />
+              <ProductCard key={product.id} product={product}  handleCart={handleCart} navigate={navigate}/>
             ))}      </div>
       <Pagination
         currentPage={productsData.data.current_page}
