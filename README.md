@@ -6,9 +6,6 @@ This is a React-based e-commerce website project built with Tailwind CSS.
 This project is a simple e-commerce website showcasing various products. It utilizes React for the frontend and Tailwind CSS for styling.
 
 
-
-
-
 ## Setup Instructions
 To set up and run this project locally, follow these steps:
 
@@ -29,7 +26,8 @@ To set up and run this project locally, follow these steps:
 5. open new Terminal run this npm run dev
 
 ## Open in your browser
-Open your browser and visit http://localhost:<port number>
+After running the command above, the link to access the website will be provided in the terminal, typically in the format http://localhost:<port number> then visit the link
+
 
 ## Usage
 Once the application is running, you can browse through the products, add items to the cart, and search by name, view product detail.
