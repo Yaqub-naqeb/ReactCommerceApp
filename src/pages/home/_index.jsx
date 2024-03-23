@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom'
 import shopping from '../../assets/hands-working-digital-device-network-graphic-overlay.jpg'
 const Home = () => {
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="bg-gray-100  flex items-center h-[80vh] justify-center align-middle">
   
 
     {/* Hero Section */}
-    <section className=" text-black py-20">
+    <section className=" text-black py-20 ">
         <div className="container mx-auto px-8">
             <div className="flex flex-col lg:flex-row items-center justify-between">
                 <div className="lg:w-1/2 mb-8 lg:mb-0">

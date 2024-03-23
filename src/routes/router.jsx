@@ -3,7 +3,7 @@ import routes from "./routeDefinations";
 import Root from "../pages/Root";
 import Home from "../pages/home/_index";
 import Products, { cartsAction, productsLoader } from "../pages/products/_index";
-import Cart, {  cartsLoader } from "../pages/cart/_index";
+import Cart, {  cartsLoader, updateCartsAction } from "../pages/cart/_index";
 import ProductDetail, { productLoader } from "../pages/products/$id"; 
 import ContactForm from "../pages/contact/_index";
 const routesConfig = [
@@ -30,6 +30,7 @@ const routesConfig = [
         path: routes.cart.path,
         element: <Cart />,
         loader: cartsLoader,
+        action:updateCartsAction
        
       },
       {

@@ -1,9 +1,27 @@
-export const cartsLoader = async ({ request }) => {
-  let cartsData = {};
+export const updateCartsAction = async ({ request }) => {
+  const formData = await request.formData();
+  const formDataObject = Object.fromEntries(formData.entries());
+  console.log(formDataObject);
+
+  let addToCart = {};
   try {
-    cartsData = await gettingData("http://localhost:3001/carts", "GET");
+    addToCart = await updateCart(formDataObject.id, formDataObject);
   } catch (err) {
     console.log(err);
+  }
+
+  return addToCart;
+};
+
+export const cartsLoader = async ({ request }) => {
+  let cartsData = {};
+
+  if (request.method === "GET") {
+    try {
+      cartsData = await gettingData("http://localhost:3001/carts", "GET");
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return cartsData;
@@ -12,46 +30,71 @@ export const cartsLoader = async ({ request }) => {
 import { Fragment, useContext, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { NavLink, useLoaderData, useRevalidator } from "react-router-dom";
+import {
+  NavLink,
+  useLoaderData,
+  useSubmit,
+  useRevalidator,
+  useNavigate,
+} from "react-router-dom";
 import { gettingData } from "../../api/get/fetchData";
 import { deleteData } from "../../api/delete/DeleteData";
 import { AuthContext } from "../../components/context/AuthContext";
+import updateCart from "../../api/update/updateCart";
 export default function Cart() {
+  const { isCartOpen, toggleAuth } = useContext(AuthContext);
 
-  const { isCartOpen,toggleAuth } = useContext(AuthContext);
-  
+  const submit = useSubmit();
 
   const products = useLoaderData();
-
   const revalidator = useRevalidator();
-  
+  const navigate = useNavigate();
+  const previousPath = "/products";
 
   const [subTotal, setSubTotal] = useState(0);
 
+  const handleIncrement = (quantity, productId) => {
+    const parsedQuantity = isNaN(parseInt(quantity)) ? 1 : parseInt(quantity); // Convert quantity to a number, default to 0 if NaN
+    const updatedQuantity = parsedQuantity + 1; // Increment the quantity
+    submit({ quantity: updatedQuantity, id: productId }, { method: "patch" });
+  };
 
-
-
-
-
-  useEffect(() => {
-    if (products && products.length > 0) {
-      const total = products.reduce(
-        (acc, product) => acc + parseFloat(product.price),
-        0
-      );
-      setSubTotal(total.toFixed(2)); // Round to 2 decimal places
-    } else {
-      setSubTotal(0);
+  const handleDecrement = (quantity, productId) => {
+    if (quantity > 1) {
+      const parsedQuantity = isNaN(parseInt(quantity)) ? 1 : parseInt(quantity); // Convert quantity to a number, default to 0 if NaN
+      const updatedQuantity = parsedQuantity - 1; // Increment the quantity
+      submit({ quantity: updatedQuantity, id: productId }, { method: "patch" });
     }
-  }, [products]);
+  };
+
+  const handleGoBack = () => {
+    navigate(previousPath, { replace: true });
+    toggleAuth();
+  };
+
   const handleDeleteCart = async (id) => {
     await deleteData(`http://localhost:3001/carts/${id}`);
     await revalidator.revalidate();
   };
 
+  useEffect(() => {
+    if (products && products.length > 0) {
+      const total = products.reduce((acc, product) => {
+        const productQuantity = isNaN(parseInt(product.quantity))
+          ? 1
+          : parseInt(product.quantity);
+        const productPrice = parseFloat(product.price);
+        return acc + productPrice * productQuantity;
+      }, 0);
+      setSubTotal(total.toFixed(2)); // Round to 2 decimal places
+    } else {
+      setSubTotal(0);
+    }
+  }, [products]);
+
   return (
     <Transition.Root show={isCartOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-10 " onClose={()=>toggleAuth()} >
+      <Dialog as="div" className="relative z-50 " onClose={() => toggleAuth()}>
         <Transition.Child
           as={Fragment}
           enter="ease-in-out duration-500"
@@ -87,7 +130,7 @@ export default function Cart() {
                           <button
                             type="button"
                             className="relative -m-2 p-2 text-gray-400 hover:text-gray-500"
-                            onClick={() =>toggleAuth()}
+                            onClick={handleGoBack}
                           >
                             <span className="absolute -inset-0.5" />
                             <span className="sr-only">Close panel</span>
@@ -125,8 +168,38 @@ export default function Cart() {
                                     </p>
                                   </div>
                                   <div className="flex flex-1 items-end justify-between text-sm">
-                                    <p className="text-gray-500">
+                                    {/* <p className="text-gray-500">
                                       Qty {product.quantity}
+                                    </p> */}
+                                    <p className="text-gray-500">
+                                      Qty{" "}
+                                      {product.quantity == "null"
+                                        ? 1
+                                        : product.quantity}
+                                      <button
+                                        type="button"
+                                        onClick={() =>
+                                          handleIncrement(
+                                            product.quantity,
+                                            product.id
+                                          )
+                                        }
+                                        className="mx-2 text-gray-500"
+                                      >
+                                        +
+                                      </button>
+                                      <button
+                                        type="button"
+                                        onClick={() =>
+                                          handleDecrement(
+                                            product.quantity,
+                                            product.id
+                                          )
+                                        }
+                                        className="mx-2 text-gray-500"
+                                      >
+                                        -
+                                      </button>
                                     </p>
 
                                     <div className="flex">
@@ -169,14 +242,14 @@ export default function Cart() {
                       <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                         <p>
                           or{" "}
-                          <button
-                            type="button"
+                          <NavLink
+                            to={"/products"}
                             className="font-medium text-indigo-600 hover:text-indigo-500"
-                            onClick={() => setOpen(false)}
+                            // onClick={() => setOpen(false)}
                           >
                             Continue Shopping
                             <span aria-hidden="true"> &rarr;</span>
-                          </button>
+                          </NavLink>
                         </p>
                       </div>
                     </div>

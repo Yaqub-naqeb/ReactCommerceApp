@@ -18,8 +18,8 @@ export function ViewDialog({open,setOpen,product,handleCart}) {
   
  
   return (
-    <div className="">
-      <Button onClick={handleOpen} variant="gradient" className="hover:bg-black transition-all delay-75 ease-in-out rounded-full p-2">
+    <div className="  ">
+      <Button onClick={handleOpen} variant="gradient" className="hover:bg-[#4848F5] transition-all delay-75 ease-in-out rounded-full p-2">
       <AiOutlineEye
                   style={{
                     color: "#ffffff",
@@ -28,7 +28,7 @@ export function ViewDialog({open,setOpen,product,handleCart}) {
       </Button>
       <Dialog
         open={open}
-        className=" h-[60%] absolute top-[20%] left-[20%] w-[60%] "
+        className=" h-[60vh] md:h-[50vh] lg:h-[50vh] xl:h-[40vh]  w-[80%]  left-[0%] absolute top-[20%] mx-[4rem] md:mx-[6rem] lg:mx-[7rem] xl:mx-[12rem]  "
         handler={handleOpen}
         animate={{
           mount: { scale: 1, y: 0 },
@@ -60,7 +60,7 @@ export function ViewDialog({open,setOpen,product,handleCart}) {
 
         </DialogHeader>
         <DialogBody className="">
-      <div className="flex items-center align-middle justify-evenly ">
+      <div className="flex flex-col md:flex-row lg:flex-row xl:flex-row items-center align-middle justify-evenly  ">
 <div >
 <img
           src={`https://ewaiq.com/public/storage/${product.image}`}
@@ -72,7 +72,7 @@ export function ViewDialog({open,setOpen,product,handleCart}) {
 
 </div>
 
-<div className="w-1/2 flex flex-col gap-4  ">
+<div className="w-1/2 flex flex-col gap-4 ">
 <h1 className="text-lg font-semibold">{product.name}</h1>
        <div>
        <p className="text-gray-600 mb-2">{product.brand.name}</p>

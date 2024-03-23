@@ -1,6 +1,5 @@
 import addCart from "../../api/post/addCart";
 
-
 export const cartsAction = async ({ request }) => {
   const formData = await request.formData();
   const formDataObject = Object.fromEntries(formData.entries());
@@ -35,31 +34,24 @@ export const productsLoader = async ({ request }) => {
   return productsData;
 };
 import { gettingData } from "../../api/get/fetchData";
-import { useLoaderData, useNavigation, useSubmit,useActionData } from "react-router-dom";
+import { useLoaderData, useNavigation, useSubmit } from "react-router-dom";
 import ProductCard from "../../components/cards/ProductCard";
 import Pagination from "../../components/Pagination";
-import SuccessAlert from '../../components/alets/SuccessAlert'
-import { useEffect, useState } from "react";
+import SuccessAlert from "../../components/alets/SuccessAlert";
+import { useState } from "react";
 
 const Products = () => {
- 
   const submit = useSubmit();
   const productsData = useLoaderData();
-  
-
-  console.log(productsData.data.data);
   const navigate = useNavigation();
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredProducts, setFilteredProducts] = useState(null);
-  const [alertVisible, setAlertVisible] = useState(false); // Change this state to control the visibility of the alert
+  const [alertVisible, setAlertVisible] = useState(false);
+
   const handleCart = (data) => {
     submit(data, { method: "post", action: "." });
-
-  
   };
 
-
-  // Function to handle search query change
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
     filterProducts(e.target.value);
@@ -74,22 +66,27 @@ const Products = () => {
 
   return (
     <div className="py-[5rem]">
-      <div className='absolute w-[16rem] right-5 top-[6.5rem]'>
-        <SuccessAlert show={alertVisible}/>
-
+      <div className="absolute w-[16rem] right-5 top-[6.5rem]">
+        <SuccessAlert show={alertVisible} />
       </div>
-   
+
       <div className="flex justify-center my-4">
         <input
           type="text"
           placeholder="Search products..."
           value={searchQuery}
           onChange={handleSearchChange}
-          className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="px-4 py-2 border border-gray-300 rounded-md rounded-r-none outline-none "
         />
+        <button
+          type="button"
+          className="bg-blue-500 hover:bg-blue-500 text-[.9rem] text-white rounded-l-none py-1 px-4 rounded"
+        >
+          Search
+        </button>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 p-20">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 px-10  xl:px-[8rem] p-20">
         {filteredProducts
           ? filteredProducts.map((product) => (
               <ProductCard

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import { PiShoppingBag } from "react-icons/pi";
 import { ViewDialog } from "../Dailog";
@@ -36,8 +35,8 @@ const ProductCard = ({ product, handleCart,navigate }) => {
 
         {/* Overlay icons */}
         {hovered && (
-          <div className="absolute z-50  inset-0 flex items-end justify-center bg-black bg-opacity-50 transition-opacity duration-300 ease-in-out">
-            <div className="flex items-center justify-center  transition-all delay-75 ease-in-out justify-between py-5  align-bottom space-x-10 ">
+          <div className="absolute z-50  inset-0 flex items-end justify-center bg-black bg-opacity-20 transition-opacity duration-300 ease-in-out">
+            <div className="flex items-center  transition-all delay-75 ease-in-out justify-between py-5  align-bottom space-x-10 ">
               {/*  shop icon*/}
 
          
@@ -46,14 +45,14 @@ const ProductCard = ({ product, handleCart,navigate }) => {
                 onClick={()=>handleCart(product)}
                 className=" self-center hover:transition-all hover:delay-75 hover:ease-in-out transition-all delay-75 ease-in-out rounded-full p-2"
               >
-                {navigate.state==='loading'? <div className="hover:bg-black w-10 h-10 rounded-full p-3 relative  ">
+                {navigate.state==='loading'? <div className="hover:bg-[#4848F5] w-10 h-10  rounded-full p-3 relative  ">
                <ClipLoader color="#ffffff" className=" absolute top-[.5rem] left-[.5rem]" size={25}  loading />
                </div>:<PiShoppingBag
                   style={{
                     color: "#ffffff",
                     fontSize: "1.5rem",
                   }}
-                  className="hover:bg-black w-12 h-12  p-3 rounded-full"
+                  className="hover:bg-[#4848F5] transition-all delay-150 ease-in-out w-12 h-12  p-3 rounded-full"
 
                 />}
               
@@ -77,12 +76,12 @@ const ProductCard = ({ product, handleCart,navigate }) => {
       <div className="bg-white">
    
       </div>
-      <NavLink
-      to={`/products/`} className="p-4">
+      <div
+      className="p-4 ">
         <h1 className="text-lg font-semibold">{product.name}</h1>
         <p className="text-gray-600 mb-2">{product.brand.name}</p>
-        <p className="text-gray-800 font-semibold">${product.price}</p>
-      </NavLink>
+        <p className=" font-semibold text-[#4E80EE]">${product.price}</p>
+      </div>
 
     </div>
   );
@@ -94,3 +93,4 @@ ProductCard.propTypes = {
   product: PropTypes.object.isRequired,
   handleCart:PropTypes.func
 };
+

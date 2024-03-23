@@ -8,15 +8,12 @@ import { AuthContext } from "../components/context/AuthContext";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigation();
-  const { isCartOpen,toggleAuth } = useContext(AuthContext);
- 
-
+  const { toggleAuth } = useContext(AuthContext);
 
   const pages = [
     { name: "Home", path: routes.root.path },
     { name: "Products", path: routes.products.path },
-    // { name: "Cart", path: routes.cart.path },
-    {name:'Contact Us',path:routes.contact.path}
+    { name: "Contact Us", path: routes.contact.path },
   ];
 
   const toggleMenu = () => {
@@ -24,7 +21,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className=" p-4">
+    <nav className="bg-[#4E80EE] p-4 fixed w-full z-40">
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center">
           <span className="text-white text-lg font-semibold">Ecommerce</span>
@@ -35,7 +32,7 @@ const Navbar = () => {
             <NavLink
               key={page.name}
               to={page.path}
-              className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+              className="text-gray-300 hover:bg-[#568bfd] hover:text-white px-3 py-2 rounded-md text-sm font-medium"
             >
               {page.name === "Products" ? (
                 navigate.state === "loading" ? (
@@ -54,38 +51,35 @@ const Navbar = () => {
           <button
             type="button"
             onClick={toggleMenu}
-            className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium focus:outline-none focus:bg-gray-700 focus:text-white"
+            className="text-gray-300 hover:bg-[#568bfd] hover:text-white px-3 py-2 rounded-md text-sm font-medium focus:outline-none focus:bg-gray-[#568bfd] focus:text-white"
           >
             <Hamburger size={20} />
           </button>
         </div>
         <div className="hidden md:flex">
-
-        <button
+          <button
             type="button"
-            className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+            className="text-gray-300 hover:bg-[#568bfd] hover:text-white px-3 py-2 rounded-md text-sm font-medium"
           >
-           <NavLink to={'/cart'} onClick={()=>toggleAuth()}>
-  <PiBagThin
-    style={{
-      fontSize:'1.2rem',
-      color:' #ffffff',
-    }}
-  />
-</NavLink>
+            <NavLink to={"/cart"} onClick={() => toggleAuth()}>
+              <PiBagThin
+                style={{
+                  fontSize: "1.2rem",
+                  color: " #ffffff",
+                }}
+              />
+            </NavLink>
           </button>
-
-
 
           <button
             type="button"
-            className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+            className="text-gray-300 hover:bg-[#568bfd] hover:text-white px-3 py-2 rounded-md text-sm font-medium"
           >
             Log In
           </button>
           <button
             type="button"
-            className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+            className="text-gray-300 hover:bg-[#568bfd] hover:text-white px-3 py-2 rounded-md text-sm font-medium"
           >
             Sign Up
           </button>
@@ -99,7 +93,7 @@ const Navbar = () => {
             <NavLink
               key={page.name}
               to={page.path}
-              className="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+              className="block text-gray-300 hover:bg-[#568bfd] hover:text-white px-3 py-2 rounded-md text-sm font-medium"
             >
               {page.name === "Products" ? (
                 navigate.state === "loading" ? (
