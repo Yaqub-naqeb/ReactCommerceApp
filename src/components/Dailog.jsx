@@ -28,7 +28,7 @@ export function ViewDialog({open,setOpen,product,handleCart}) {
       </Button>
       <Dialog
         open={open}
-        className=" h-[60vh] md:h-[50vh] lg:h-[50vh] xl:h-[40vh]  w-[80%]  left-[0%] absolute top-[20%] mx-[4rem] md:mx-[6rem] lg:mx-[7rem] xl:mx-[12rem]  "
+        className=" h-[60vh] md:h-[50vh] lg:h-[50vh] xl:h-[60vh]  w-[80%]  left-[0%] absolute top-[20%] mx-[4rem] md:mx-[6rem] lg:mx-[7rem] xl:mx-[12rem]  "
         handler={handleOpen}
         animate={{
           mount: { scale: 1, y: 0 },
