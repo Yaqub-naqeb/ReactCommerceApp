@@ -29,7 +29,7 @@ To set up and run this project locally, follow these steps:
 5. open new Terminal run this npm run dev
 
 ## Open in your browser
-Open your browser and visit http://localhost:<port number> (usually around 5174, but check your project configuration) to view the application.
+Open your browser and visit http://localhost:<port number>
 
 ## Usage
 Once the application is running, you can browse through the products, add items to the cart, and search by name, view product detail.
