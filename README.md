@@ -17,7 +17,7 @@ To set up and run this project locally, follow these steps:
    ```bash
    git clone https://github.com/Yaqub-naqeb/ReactCommerceApp.git
 
-2.Navigate to the Project Directory: cd your-project-directory
+2.Navigate to the Project Directory: cd your-project-directory or open the projects via files
 
 3. run this command npm install
 
