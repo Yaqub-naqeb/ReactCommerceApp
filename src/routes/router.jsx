@@ -5,6 +5,7 @@ import Home from "../pages/home/_index";
 import Products, { cartsAction, productsLoader } from "../pages/products/_index";
 import Cart, {  cartsLoader } from "../pages/cart/_index";
 import ProductDetail, { productLoader } from "../pages/products/$id"; 
+import ContactForm from "../pages/contact/_index";
 const routesConfig = [
   {
     errorElement: <ErrorPage />,
@@ -31,6 +32,10 @@ const routesConfig = [
         loader: cartsLoader,
        
       },
+      {
+        path:routes.contact.path,
+        element:<ContactForm/>
+      }
     ],
   },
 ];

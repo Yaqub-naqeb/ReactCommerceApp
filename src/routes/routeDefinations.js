@@ -13,5 +13,8 @@ const routes = {
   root: {
     path: "/",
   },
+  contact:{
+    path:'/contact'
+  }
 };
 export default routes;

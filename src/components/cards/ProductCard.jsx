@@ -7,6 +7,7 @@ import {ClipLoader} from 'react-spinners'
 import '../../App.css'
 const ProductCard = ({ product, handleCart,navigate }) => {
   const [hovered, setHovered] = useState(false);
+
   const [open, setOpen] = useState(false);
 
   const handleMouseEnter = () => {

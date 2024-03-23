@@ -1,21 +1,22 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Hamburger from "hamburger-react";
-
 import routes from "../routes/routeDefinations";
-import { NavLink,useNavigation } from "react-router-dom";
-
-import {MoonLoader,BeatLoader,SyncLoader} from 'react-spinners'
-
+import { NavLink, useNavigation } from "react-router-dom";
+import { BeatLoader } from "react-spinners";
+import { PiBagThin } from "react-icons/pi";
+import { AuthContext } from "../components/context/AuthContext";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const navigate=useNavigation();
+  const navigate = useNavigation();
+  const { isCartOpen,toggleAuth } = useContext(AuthContext);
+ 
 
 
   const pages = [
     { name: "Home", path: routes.root.path },
     { name: "Products", path: routes.products.path },
-    { name: "Cart", path: routes.cart.path },
+    // { name: "Cart", path: routes.cart.path },
+    {name:'Contact Us',path:routes.contact.path}
   ];
 
   const toggleMenu = () => {
@@ -23,7 +24,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gray-800 p-4">
+    <nav className=" p-4">
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center">
           <span className="text-white text-lg font-semibold">Ecommerce</span>
@@ -36,7 +37,15 @@ const Navbar = () => {
               to={page.path}
               className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
             >
-              { page.name==='Products' ? navigate.state==='loading'?<BeatLoader size={10} color="#36d7b7" />:page.name:page.name}
+              {page.name === "Products" ? (
+                navigate.state === "loading" ? (
+                  <BeatLoader size={10} color="#36d7b7" />
+                ) : (
+                  page.name
+                )
+              ) : (
+                page.name
+              )}
             </NavLink>
           ))}
         </div>
@@ -51,6 +60,23 @@ const Navbar = () => {
           </button>
         </div>
         <div className="hidden md:flex">
+
+        <button
+            type="button"
+            className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+          >
+           <NavLink to={'/cart'} onClick={()=>toggleAuth()}>
+  <PiBagThin
+    style={{
+      fontSize:'1.2rem',
+      color:' #ffffff',
+    }}
+  />
+</NavLink>
+          </button>
+
+
+
           <button
             type="button"
             className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
@@ -75,7 +101,15 @@ const Navbar = () => {
               to={page.path}
               className="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
             >
-              {navigate.state==='loading'?'loading':page.name}
+              {page.name === "Products" ? (
+                navigate.state === "loading" ? (
+                  <BeatLoader size={10} color="#36d7b7" />
+                ) : (
+                  page.name
+                )
+              ) : (
+                page.name
+              )}
             </NavLink>
           ))}
         </div>
